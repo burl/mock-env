@@ -17,8 +17,8 @@
     "unit",
     "test"
   ],
-  "author": "Burl <burl.bn@mgail.com>",
-  "license": "Simplified BSD",
+  "author": "Burl <burl+npm@nyswonger.org>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/burl/mock-env/issues"
   },
