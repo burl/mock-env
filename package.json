@@ -1,0 +1,29 @@
+{
+  "name": "mock-env",
+  "version": "0.1.0",
+  "description": "morph process.env by adding/chaning/removing env vars for the lifetime of a callback",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/_mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/burl/mock-env.git"
+  },
+  "keywords": [
+    "node",
+    "mock",
+    "environment",
+    "unit",
+    "test"
+  ],
+  "author": "Burl <burl.bn@mgail.com>",
+  "license": "Simplified BSD",
+  "bugs": {
+    "url": "https://github.com/burl/mock-env/issues"
+  },
+  "homepage": "https://github.com/burl/mock-env",
+  "devDependencies": {
+    "mocha": "^1.21.4"
+  }
+}
