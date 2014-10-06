@@ -1,6 +1,6 @@
 {
   "name": "mock-env",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "morph process.env by adding/chaning/removing env vars for the lifetime of a callback",
   "main": "index.js",
   "scripts": {
