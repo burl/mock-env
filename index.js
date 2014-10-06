@@ -1,4 +1,11 @@
 /**
+ * this module provides a method to modify process.env per arguments,
+ * invoke a callback, then restore the original values of process.env
+ * from a delta that was saved.
+ * @module mock-env
+ */
+
+/**
  * add or modify items in env based on key/value pairs in setVars and
  * save state information for later
  * @arg {Object} origEnv - place to save state of original env
@@ -13,10 +20,12 @@ function setVars(origEnv, setVars) {
     return;
   for (key in setVars) {
     if (setVars.hasOwnProperty(key)) {
-      origEnv[key] = [
-        !!process.env.hasOwnProperty(key),
-        process.env[key]
-      ];
+      if ( ! origEnv.hasOwnProperty(key)) {
+        origEnv[key] = [
+          !!process.env.hasOwnProperty(key),
+          process.env[key]
+        ];
+      }
       process.env[key] = setVars[key];
     }
   }
@@ -34,10 +43,12 @@ function delVars(origEnv, deleteVars) {
   if (!Array.isArray(deleteVars))
     return;
   for (i = 0; i < deleteVars.length; i++) {
-    origEnv[deleteVars[i]] = [
-      !!process.env.hasOwnProperty(deleteVars[i]),
-      process.env[deleteVars[i]]
-    ];
+    if ( ! origEnv.hasOwnProperty(deleteVars[i])) {
+      origEnv[deleteVars[i]] = [
+        !!process.env.hasOwnProperty(deleteVars[i]),
+        process.env[deleteVars[i]]
+      ];
+    }
     delete process.env[deleteVars[i]];
   }
   return;
