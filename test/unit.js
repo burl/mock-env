@@ -14,8 +14,8 @@ function checkUnmodifiedEnv() {
     assert.equal('bar', process.env.ALSO_SET);
   });
   it('should not have certain vars', function () {
-    assert.equal(false, process.env.hasOwnProperty('NOTSET'));
-    assert.equal(true, process.env.hasOwnProperty('ALSO_SET'));
+    assert.strictEqual(false, process.env.hasOwnProperty('NOTSET'));
+    assert.strictEqual(true, process.env.hasOwnProperty('ALSO_SET'));
   });
 }
 
@@ -40,13 +40,13 @@ describe('mockEnv', function () {
 
     it('should return the value from the callback', function () {
       assert.equal('object', typeof res);
-      assert.ok(!!res.hasOwnProperty('this_is_the_result'));
+      assert.strictEqual(true, res.hasOwnProperty('this_is_the_result'));
     });
 
     it('should have different values than before', function () {
       assert.equal('bada', res.IS_SET);
       assert.equal('bing', res.NOTSET);
-      assert.equal(false, res.ALSO_SET_exists);
+      assert.strictEqual(false, res.ALSO_SET_exists);
     });
   });
 
