@@ -6,19 +6,21 @@
  * @function
  */
 function setVars(origEnv, setVars) {
-    var key;
-    if (typeof setVars !== 'object') return;
-    if (Array.isArray(setVars)) return;
-    for(key in setVars) {
-        if (setVars.hasOwnProperty(key)) {
-            origEnv[key] = [
-                !! process.env.hasOwnProperty(key),
-                process.env[key]
-            ];
-            process.env[key] = setVars[key];
-        }
-    }
+  var key;
+  if (typeof setVars !== 'object')
     return;
+  if (Array.isArray(setVars))
+    return;
+  for (key in setVars) {
+    if (setVars.hasOwnProperty(key)) {
+      origEnv[key] = [
+        !!process.env.hasOwnProperty(key),
+        process.env[key]
+      ];
+      process.env[key] = setVars[key];
+    }
+  }
+  return;
 }
 
 /**
@@ -28,16 +30,17 @@ function setVars(origEnv, setVars) {
  * @function
  */
 function delVars(origEnv, deleteVars) {
-    var i;
-    if ( ! Array.isArray(deleteVars)) return;
-    for(i = 0; i < deleteVars.length; i++) {
-        origEnv[deleteVars[i]] = [
-            !! process.env.hasOwnProperty(deleteVars[i]),
-            process.env[deleteVars[i]]
-        ];
-        delete process.env[deleteVars[i]];
-    }
+  var i;
+  if (!Array.isArray(deleteVars))
     return;
+  for (i = 0; i < deleteVars.length; i++) {
+    origEnv[deleteVars[i]] = [
+      !!process.env.hasOwnProperty(deleteVars[i]),
+      process.env[deleteVars[i]]
+    ];
+    delete process.env[deleteVars[i]];
+  }
+  return;
 }
 
 /**
@@ -46,16 +49,15 @@ function delVars(origEnv, deleteVars) {
  * @function
  */
 function restoreEnv(origEnv) {
-    var key;
-    for(key in origEnv) {
-        if (origEnv[key][0]) {
-            process.env[key] = origEnv[key][1];
-        }
-        else {
-            delete process.env[key];
-        }
+  var key;
+  for (key in origEnv) {
+    if (origEnv[key][0]) {
+      process.env[key] = origEnv[key][1];
+    } else {
+      delete process.env[key];
     }
-    return;
+  }
+  return;
 }
 
 /**
@@ -66,19 +68,13 @@ function restoreEnv(origEnv) {
  * @function
  */
 function callbackInModifiedEnv(callback, setInEnv, removeFromEnv) {
-    var origEnv = {};
-    var result;
-
-    setVars(origEnv, setInEnv);
-    delVars(origEnv, removeFromEnv);
-
-    result = callback();
-
-    restoreEnv(origEnv);
-
-    return result;
+  var origEnv = {};
+  var result;
+  setVars(origEnv, setInEnv);
+  delVars(origEnv, removeFromEnv);
+  result = callback();
+  restoreEnv(origEnv);
+  return result;
 }
 
-module.exports = {
-    morph: callbackInModifiedEnv,
-};
+module.exports = { morph: callbackInModifiedEnv };
