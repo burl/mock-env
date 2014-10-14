@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/burl/mock-env.svg?branch=master)](https://travis-ci.org/burl/mock-env)
+
 # mock-env
 
 morph process.env by adding/chaning/removing env vars for the lifetime of a callback.
