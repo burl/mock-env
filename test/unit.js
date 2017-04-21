@@ -1,4 +1,5 @@
 var assert = require('assert')
+,   has = require('has')
 ,   morph = require('../').morph
 ;
 
@@ -14,8 +15,8 @@ function checkUnmodifiedEnv() {
     assert.equal(process.env.ALSO_SET, 'bar');
   });
   it('should not have certain vars', function () {
-    assert.strictEqual(process.env.hasOwnProperty('NOTSET'), false);
-    assert.strictEqual(process.env.hasOwnProperty('ALSO_SET'), true);
+    assert.strictEqual(has(process.env, 'NOTSET'), false);
+    assert.strictEqual(has(process.env, 'ALSO_SET'), true);
   });
 }
 
@@ -31,7 +32,7 @@ describe('mockEnv', function () {
           this_is_the_result: true,
           IS_SET: process.env.IS_SET,
           NOTSET: process.env.NOTSET,
-          ALSO_SET_exists: process.env.hasOwnProperty('ALSO_SET')
+          ALSO_SET_exists: has(process.env, 'ALSO_SET')
         };
       }, {
         IS_SET: 'bada',
@@ -43,7 +44,7 @@ describe('mockEnv', function () {
 
     it('should return the value from the callback', function () {
       assert.equal(typeof res, 'object');
-      assert.strictEqual(res.hasOwnProperty('this_is_the_result'), true);
+      assert.strictEqual(has(res, 'this_is_the_result'), true);
     });
 
     it('should have different values than before', function () {
@@ -59,7 +60,7 @@ describe('mockEnv', function () {
         return {
           IS_SET: process.env.IS_SET,
           NOTSET: process.env.NOTSET,
-          ALSO_SET_exists: process.env.hasOwnProperty('ALSO_SET')
+          ALSO_SET_exists: has(process.env, 'ALSO_SET')
         };
       }, {
         IS_SET: 'bada',

@@ -23,6 +23,9 @@
     "url": "https://github.com/burl/mock-env/issues"
   },
   "homepage": "https://github.com/burl/mock-env",
+  "dependencies": {
+    "has": "^1.0.1"
+  },
   "devDependencies": {
     "mocha": "^1.21.4"
   }
