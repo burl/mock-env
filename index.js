@@ -81,11 +81,20 @@ function restoreEnv(origEnv) {
 function callbackInModifiedEnv(callback, setInEnv, removeFromEnv) {
   var origEnv = {};
   var result;
+
   setVars(origEnv, setInEnv);
   delVars(origEnv, removeFromEnv);
+
   result = callback();
-  restoreEnv(origEnv);
-  return result;
+
+  if (result && typeof result.then === 'function') {
+    return result.then(() => {
+      return restoreEnv(origEnv);
+    });
+  } else {
+    restoreEnv(origEnv);
+    return result;
+  }
 }
 
 module.exports = { morph: callbackInModifiedEnv };
