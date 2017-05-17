@@ -6,7 +6,6 @@ morph process.env by adding/chaning/removing env vars for the lifetime of a call
 
 This is intended for use in unit tests.  It modifies process.env per passed arguments, calls a designated callback, then restores process.env to its original value.
 
-Beware using this in an asynchronous manner.
 
 ## Install
 
