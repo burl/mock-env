@@ -5,6 +5,8 @@
  * @module mock-env
  */
 
+var has = require('has');
+
 /**
  * add or modify items in env based on key/value pairs in setVars and
  * save state information for later
@@ -19,10 +21,10 @@ function setVars(origEnv, setVars) {
   if (Array.isArray(setVars))
     return;
   for (key in setVars) {
-    if (setVars.hasOwnProperty(key)) {
-      if ( ! origEnv.hasOwnProperty(key)) {
+    if (has(setVars, key)) {
+      if (!has(origEnv, key)) {
         origEnv[key] = [
-          !!process.env.hasOwnProperty(key),
+          !!has(process.env, key),
           process.env[key]
         ];
       }
@@ -43,9 +45,9 @@ function delVars(origEnv, deleteVars) {
   if (!Array.isArray(deleteVars))
     return;
   for (i = 0; i < deleteVars.length; i++) {
-    if ( ! origEnv.hasOwnProperty(deleteVars[i])) {
+    if (!has(origEnv, deleteVars[i])) {
       origEnv[deleteVars[i]] = [
-        !!process.env.hasOwnProperty(deleteVars[i]),
+        !!has(process.env, deleteVars[i]),
         process.env[deleteVars[i]]
       ];
     }
