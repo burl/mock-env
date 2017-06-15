@@ -1,10 +1,12 @@
 {
   "name": "mock-env",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "morph process.env by adding/chaning/removing env vars for the lifetime of a callback",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/_mocha"
+    "test": "node_modules/.bin/_mocha",
+    "preversion": "npm test",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,9 @@
+.npmignore
+.gitignore
+core
+tmp/**
+temp/**
+test/**
+.travis.yml
+*.tar.gz
+*.tgz
